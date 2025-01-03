@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crie Seu Currículo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #0078D7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0078D7;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #0078D7;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f4f4f9;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Crie Seu Currículo Online</h1>
+        <p>Totalmente gratuito e fácil de usar!</p>
+    </header>
+    <main>
+        <h2>Preencha suas informações</h2>
+        <form id="curriculo-form">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" placeholder="Ex: João Silva" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Ex: joao@email.com" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" placeholder="Ex: (11) 91234-5678" required>
+
+            <label for="objetivo">Objetivo Profissional:</label>
+            <textarea id="objetivo" name="objetivo" rows="4" placeholder="Descreva seu objetivo profissional..."></textarea>
+
+            <label for="experiencia">Experiência Profissional:</label>
+            <textarea id="experiencia" name="experiencia" rows="4" placeholder="Descreva sua experiência profissional..."></textarea>
+
+            <label for="formacao">Formação Acadêmica:</label>
+            <textarea id="formacao" name="formacao" rows="4" placeholder="Descreva sua formação acadêmica..."></textarea>
+
+            <label for="habilidades">Habilidades:</label>
+            <textarea id="habilidades" name="habilidades" rows="4" placeholder="Liste suas principais habilidades..."></textarea>
+
+            <button type="button" onclick="gerarPDF()">Gerar Currículo em PDF</button>
+        </form>
+    </main>
+    <footer>
+        <p>Desenvolvido para ajudar você a se destacar no mercado de trabalho.</p>
+    </footer>
+
+    <script>
+        async function gerarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const objetivo = document.getElementById('objetivo').value;
+            const experiencia = document.getElementById('experiencia').value;
+            const formacao = document.getElementById('formacao').value;
+            const habilidades = document.getElementById('habilidades').value;
+
+            doc.text(`Nome: ${nome}`, 10, 10);
+            doc.text(`E-mail: ${email}`, 10, 20);
+            doc.text(`Telefone: ${telefone}`, 10, 30);
+            doc.text(`Objetivo Profissional:`, 10, 40);
+            doc.text(objetivo, 10, 50);
+            doc.text(`Experiência Profissional:`, 10, 70);
+            doc.text(experiencia, 10, 80);
+            doc.text(`Formação Acadêmica:`, 10, 100);
+            doc.text(formacao, 10, 110);
+            doc.text(`Habilidades:`, 10, 130);
+            doc.text(habilidades, 10, 140);
+
+            doc.save('curriculo.pdf');
+        }
+    </script>
+</body>
+</html>
